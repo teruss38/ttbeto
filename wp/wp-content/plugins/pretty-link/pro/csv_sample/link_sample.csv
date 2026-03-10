@@ -1,0 +1,3 @@
+url,slug,name,redirect_type,track_me,nofollow,param_forwarding,sponsored,keywords
+https://google.com,google,A link to Google,307,1,1,0,1,
+https://yahoo.com,yahoo,A link to Yahoo,301,0,1,1,0,"yahoo,search engine"
