@@ -837,7 +837,6 @@ function alignListHeights(){
         $('.mfn-vr-select option').attr('disabled', 'true');
       }
 
-
       $('.woocommerce form.variations_form.cart table.variations select option').each(function() {
 
           var val = $(this).attr('value');

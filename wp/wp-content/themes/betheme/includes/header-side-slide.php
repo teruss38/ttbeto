@@ -50,7 +50,7 @@ $cart_icon = trim( mfn_opts_get('shop-cart') ?? '' );
 
 // search
 
-$header_search = mfn_opts_get('header-search');
+$header_search = mfn_opts_get('header-search-form');
 
 // responsive | mobile | options
 
@@ -238,7 +238,7 @@ if (mfn_opts_get('header-search')) {
 	echo '<div class="search-wrapper">';
 		echo '<form id="side-form" method="get" action="'. esc_url(home_url('/')) .'" role="search" aria-label="'. __('side slide search', 'betheme') .'">';
 
-			if (mfn_opts_get('header-search') == 'shop') {
+			if ( mfn_opts_get('header-search') == 'shop' ) {
 				echo '<input type="hidden" name="post_type" value="product" />';
 			}
 

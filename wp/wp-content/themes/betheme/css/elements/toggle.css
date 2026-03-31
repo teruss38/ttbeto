@@ -18,7 +18,7 @@
 .mfn-toggle-open-all .toggle-bar{cursor:unset;user-select:initial}
 .mfn-toggle .toggle-bar .toggle-heading { flex: 1; margin-bottom: 0; }
 .mfn-toggle .toggle-bar .minus { display: none; }
-.mfn-toggle .toggle-content > *:last-child { margin-bottom: 0; }
+.mfn-toggle .toggle-content div > *:last-child { margin-bottom: 0; }
 
 .mfn-toggle .active .toggle-bar .plus { display: none; }
 .mfn-toggle .active .toggle-bar .minus { display: block; }

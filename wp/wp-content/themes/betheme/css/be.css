@@ -2346,7 +2346,8 @@ a.mfn-love.loved i:first-child{ display: none; }
 .author-box .avatar-wrapper{width:64px;height:64px;float:left;border-width:8px;border-style:solid;display:block;line-height:0;-webkit-border-radius:100%;border-radius:100%;overflow:hidden}
 .author-box .desc-wrapper{background:rgba(0,0,0,.02);padding:20px;position:relative;margin-left:105px}
 .author-box .desc-wrapper:after{content:"";display:block;position:absolute;left:-6px;top:35px;width:0;height:0;border-style:solid;border-width:6px 6px 6px 0;border-color:transparent rgba(0,0,0,.02) transparent transparent}
-.author-box .desc-wrapper h5{margin-bottom:5px}
+.author-box .desc-wrapper p{font-size:110%;font-weight:500;margin-bottom:5px!important}
+.author-box .desc-wrapper p a{color:#00032a}
 
 	/* Hide Love */
 	.hide-love .button-love{display:none!important}
@@ -2356,7 +2357,8 @@ a.mfn-love.loved i:first-child{ display: none; }
 
 	/* Post related */
 	.section-post-related .section-related-adjustment{border-top-width:1px;border-style:solid;padding-top:20px}
-	.section-post-related .post-related{position:relative;width:33.333%}
+  .section-post-related .related-heading{font-size:120%;font-weight:500}
+  .section-post-related .post-related{position:relative;width:33.333%}
 
 	.section-post-related .col-2 .post-related{width:50%}
 	.section-post-related .col-3 .post-related{width:33.333%}
@@ -3862,10 +3864,10 @@ input[type="date"]::-webkit-calendar-picker-indicator{font-size:80%}
 ul{list-style:none outside}
 ol{list-style:decimal}
 
-.column_column ul,.column_post_content ul,.column_helper ul,.column_visual ul,.icon_box ul,.mfn-acc ul,.ui-tabs-panel ul,.post-excerpt ul,.the_content_wrapper ul,.column_product_short_description ul,.column_product_content .source-editor ul,.elementor-widget-text-editor ul,.mfn-toggle .toggle-content ul{
+.column_column ul,.column_post_content ul:not(.mfn-list),.column_helper ul,.column_visual ul,.icon_box ul,.mfn-acc ul,.ui-tabs-panel ul,.post-excerpt ul,.the_content_wrapper ul,.column_product_short_description ul,.column_product_content .source-editor ul,.elementor-widget-text-editor ul,.mfn-toggle .toggle-content ul{
   list-style:disc outside;margin:0 0 15px 30px
 }
-.column_column ol,.column_post_content ol,.column_helper ol,.column_visual ol,.icon_box ol,.mfn-acc ol,.ui-tabs-panel ol,.post-excerpt ol,.the_content_wrapper ol,.column_product_short_description ol,.column_product_content .source-editor ol,.elementor-widget-text-editor ol,.mfn-toggle .toggle-content ol{
+.column_column ol,.column_post_content ol:not(.mfn-list),.column_helper ol,.column_visual ol,.icon_box ol,.mfn-acc ol,.ui-tabs-panel ol,.post-excerpt ol,.the_content_wrapper ol,.column_product_short_description ol,.column_product_content .source-editor ol,.elementor-widget-text-editor ol,.mfn-toggle .toggle-content ol{
   margin:0 0 15px 30px
 }
 .column_column ul li,.column_post_content ul li,.column_helper ul li,.column_visual ul li,.icon_box ul li,.mfn-acc ul li,.ui-tabs-panel ul li,.post-excerpt ul li,.the_content_wrapper ul li,.column_product_short_description ul li,.column_product_content .source-editor ul li,.elementor-widget-text-editor ul li,
@@ -5116,7 +5118,8 @@ body:not(.style-simple) .timeline_items > li .desc { text-decoration: underline;
 
 /* clients */
 
-.column_clients .clients_ul{margin:0; display: grid; grid-template-columns: repeat(6, 1fr); width: 100%; gap: 20px;}
+.column_clients .clients_ul,
+.elementor-widget-mfn_clients .clients_ul{margin:0; display: grid; grid-template-columns: repeat(6, 1fr); width: 100%; gap: 20px;}
 .clients_ul li{margin:0!important;list-style:none}
 .clients_ul .client_wrapper{padding:10px 15px; background:rgba(0,0,0,.01);text-align:center;line-height:0;position:relative}
 .clients_ul .client_wrapper:hover{background:rgba(0,0,0,.05)}

@@ -11,7 +11,7 @@ if ( mfn_opts_get('shop-layout') === 'masonry' ) {
 
 global $mfn_global;
 
-if( !empty($mfn_global['archive_template']) && is_numeric( $mfn_global['archive_template'] ) && get_post_type( $mfn_global['archive_template'] ) == 'template' ){
+if( !empty($mfn_global['archive_template']) && is_numeric( $mfn_global['archive_template'] ) && get_post_type( $mfn_global['archive_template'] ) == 'template' ) {
 
 	if( get_post_meta( $mfn_global['archive_template'], 'mfn-post-hide-content', true ) ){
 		remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description' );

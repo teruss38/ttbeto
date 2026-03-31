@@ -411,6 +411,10 @@ if( ! class_exists('Mfn_Builder_Front') )
   			$this->the_content();
   		}
 
+
+  		$this->post_id = false;
+			self::$post_id2 = false;
+
   	}
 
   	public function show_sections($mfn_items, $vbtoolsoff = false) {

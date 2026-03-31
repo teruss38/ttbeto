@@ -21,6 +21,23 @@ const sizes = [
 
 
 const aliases = {
+    'heading_title': [
+        { key: 'title', val: '{title}' }
+    ],
+    'heading_price': [
+        { key: 'title', val: '{price}' },
+        { key: 'header_tag', val: 'h6' }
+    ],
+    'plain_text_excerpt': [
+        { key: 'content', val: '{excerpt}' }
+    ],
+    'image_featured_image': [
+        { key: 'src', val: '{featured_image}' }
+    ],
+    'button_read_more': [
+        { key: 'link', val: '{permalink}' },
+        { key: 'title', val: 'Read more' }
+    ],
     'shop_products_related': [
         { key: 'products', val: '4' },
         { key: 'display', val: 'related' },

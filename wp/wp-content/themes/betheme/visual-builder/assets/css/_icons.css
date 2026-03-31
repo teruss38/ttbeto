@@ -65,7 +65,7 @@
 .mfn-icon-select-parent { background-image:url(../svg/options/select-parent.svg); }
 .mfn-icon-rename { background-image:url(../svg/options/rename.svg); }
 .mfn-icon-sort { background-image:url(../svg/options/sort.svg); }
-
+ 
 .mfn-icon-settings { background-image:url(../svg/others/settings.svg); }
 .mfn-icon-options { background-image:url(../svg/menu/options.svg); }
 .mfn-icon-support {background-image:url(../svg/others/support.svg)}
@@ -288,6 +288,12 @@
 
 .mfn-item-archive_heading .card-icon, .mfn-item-post_heading .card-icon, .mfn-icon-post-heading, .column_post_heading .card-icon, .mfn-icon-archive-heading{background-image:url(../svg/items/post-heading.svg)}
 
+
+.mfn-item-heading_title .card-icon{background-image:url(../svg/items/post-heading.svg)}
+.mfn-item-image_featured_image .card-icon{background-image:url(../svg/items/post-image.svg)}
+.mfn-item-plain_text_excerpt .card-icon{background-image:url(../svg/items/post-content.svg)}
+.mfn-item-button_read_more .card-icon{background-image:url(../svg/items/button.svg); }
+.mfn-item-heading_price .card-icon{background-image:url(../svg/items/product-price.svg)}
 
 .mfn-item-archive_image .card-icon, .mfn-item-post_image .card-icon, .mfn-icon-post-image, .column_post_image .card-icon, .mfn-icon-archive-image{background-image:url(../svg/items/post-image.svg)}
 .mfn-item-post_author .card-icon, .mfn-icon-post-author, .column_post_author .card-icon{background-image:url(../svg/items/post-author.svg)}
@@ -595,6 +601,13 @@
 
 .mfn-ui-dark .mfn-item-archive_heading .card-icon, .mfn-ui-dark .mfn-item-post_heading .card-icon, .mfn-ui-dark .mfn-icon-post-heading, .mfn-ui-dark .mfn-icon-archive-heading{background-image:url(../_dark/svg/items/post-heading.svg)}
 .mfn-ui-dark .mfn-item-archive_image .card-icon, .mfn-ui-dark .mfn-item-post_image .card-icon, .mfn-ui-dark .mfn-icon-post-image, .mfn-ui-dark .mfn-icon-archive-image{background-image:url(../_dark/svg/items/post-image.svg)}
+
+.mfn-ui-dark .mfn-item-heading_title .card-icon{background-image:url(../_dark/svg/items/post-heading.svg)}
+.mfn-ui-dark .mfn-item-image_featured_image .card-icon{background-image:url(../_dark/svg/items/post-image.svg)}
+.mfn-ui-dark .mfn-item-plain_text_excerpt .card-icon{background-image:url(../_dark/svg/items/post-content.svg)}
+.mfn-ui-dark .mfn-item-button_read_more .card-icon{background-image:url(../_dark/svg/items/button.svg); }
+.mfn-ui-dark .mfn-item-heading_price .card-icon{background-image:url(../_dark/svg/items/product-price.svg)}
+
 .mfn-ui-dark .mfn-item-post_author .card-icon, .mfn-ui-dark .mfn-icon-post-author{background-image:url(../_dark/svg/items/post-author.svg)}
 .mfn-ui-dark .mfn-item-post_date .card-icon, .mfn-ui-dark .mfn-icon-post-date{background-image:url(../_dark/svg/items/post-date.svg)}
 .mfn-ui-dark .mfn-item-post_portfolio_related .card-icon, .mfn-ui-dark .mfn-icon-post-portfolio-related, .mfn-ui-dark .mfn-item-post_blog_related .card-icon, .mfn-ui-dark .mfn-icon-post-blog-related{background-image:url(../_dark/svg/items/post-related.svg)}

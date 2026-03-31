@@ -1021,7 +1021,7 @@ function redrawAllRevolutionSliders() {
 
   $(document).on('mfn:ajax:refresh', function() {
 
-    if( $('.mfn-looped-items-slider').length ){
+    if( $('.mfn-looped-items-slider').length ) {
       queryLoopSlider();
     }
 
@@ -1132,7 +1132,7 @@ function redrawAllRevolutionSliders() {
      *
      * */
 
-    if( $('.mfn-go-to').length ){
+    if( $('.mfn-go-to').length ) {
       $(document).on('click', '.mfn-go-to', function(e) {
         e.preventDefault();
         let target = $(this).attr('data-mfngoto');
@@ -2504,6 +2504,10 @@ function redrawAllRevolutionSliders() {
     lightbox();
 
     $(document).on('mfnPopupInit', function() {
+      lightbox();
+    });
+
+    $(document).on('mfn:tabber:open', function() {
       lightbox();
     });
 
@@ -4741,7 +4745,7 @@ function redrawAllRevolutionSliders() {
       slider.on('dragstart', '.slick-slide a[rel="lightbox"]', function(event) {
         if (lightboxAttr) {
           var events = $._data(this,'events');
-          if( events && Object.prototype.hasOwnProperty.call(events, 'click') ){
+          if( events && Object.prototype.hasOwnProperty.call(events, 'click') ) {
             clickEvent = events.click[0];
             $(this).addClass('off-click').off('click');
           }
@@ -4844,14 +4848,11 @@ function redrawAllRevolutionSliders() {
 
       });
 
-
       if( $('body').hasClass('mfn-ui') ){
         setTimeout(mfnTabber.sliding_bg, 800); // must have
       }else{
         setTimeout(mfnTabber.sliding_bg, 300); // must have
       }
-
-
 
     },
 

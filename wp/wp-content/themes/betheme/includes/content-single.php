@@ -301,7 +301,7 @@ $button_text = $translate['readmore'];
 								<?php echo get_avatar(get_the_author_meta('email'), '64', false, get_the_author_meta('display_name')); ?>
 							</div>
 							<div class="desc-wrapper">
-								<h5><a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author_meta('display_name'); ?></a></h5>
+								<p><a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>"><?php the_author_meta('display_name'); ?></a></p>
 								<div class="desc"><?php the_author_meta('description'); ?></div>
 							</div>
 						</div>
@@ -337,7 +337,7 @@ $button_text = $translate['readmore'];
 					if ($query_related_posts->have_posts()) {
 
 						echo '<div class="section-related-adjustment '. esc_attr($related_style) .'">';
-							echo '<h4>'. esc_html($translate['related']) .'</h4>';
+							echo '<p class="related-heading">'. esc_html($translate['related']) .'</p>';
 							echo '<div class="section-related-ul '. esc_attr($related_cols) .'">';
 
 								while ($query_related_posts->have_posts()) {

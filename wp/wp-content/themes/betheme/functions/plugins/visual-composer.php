@@ -16,7 +16,7 @@ if (! function_exists('mfn_vc_image')) {
 	{
 		if ($image && is_numeric($image)) {
 			$image = wp_get_attachment_image_src($image, 'full');
-			$image = $image[0];
+			$image = $image[0] ?? false;
 		}
 		return $image;
 	}

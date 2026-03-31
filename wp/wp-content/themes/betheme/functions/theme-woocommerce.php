@@ -17,17 +17,29 @@ ini_set("display_errors", 1);*/
 
 function mfn_woo_support() {
 
-	// single
-	$single_image_width = mfn_opts_get( 'single-product-main-image-size', 800 );
-	// archives
-	$thumbnail_image_width = mfn_opts_get( 'shop-image-width', 800 );
+	$theme_support_attr = false;
+
+	// featured image
+
+	$shop_images = mfn_opts_get( 'shop-images' );
+	if( 'plugin' !== $shop_images ){
+
+		// use Customizer instead
+
+		$thumbnail_image_width = mfn_opts_get( 'shop-image-width', 800 );
+		$single_image_width = mfn_opts_get( 'single-product-main-image-size', 800 );
+
+		$theme_support_attr = [
+			'thumbnail_image_width' => $thumbnail_image_width,
+			'single_image_width' => $single_image_width,
+		];
+	}
 
 	// add theme support
 
-	add_theme_support('woocommerce', array(
-		'thumbnail_image_width' => $thumbnail_image_width,
-		'single_image_width' => $single_image_width,
-	));
+	add_theme_support( 'woocommerce', $theme_support_attr );
+
+	// single product gallery thumbnails
 
 	add_filter('woocommerce_get_image_size_gallery_thumbnail', function($size) {
 
@@ -46,7 +58,6 @@ function mfn_woo_support() {
   });
 
 }
-
 add_action( 'after_setup_theme', 'mfn_woo_support' );
 add_action( 'wp_footer', 'woocommerce_demo_store', 10 );
 
@@ -1190,7 +1201,7 @@ add_action('woocommerce_before_shop_loop', 'mfn_woo_products_list_options', 20);
 function mfn_woo_products_list_options() {
 	$mfn_front_tmpl = new Mfn_Template_View();
 	$shop_archive = $mfn_front_tmpl->get_archive_template();
-	
+
 	$mfn_tmpl_type = !empty(Mfn_Builder_Front::$post_id2) ? get_post_meta(Mfn_Builder_Front::$post_id2, 'mfn_template_type', true) : 'default';
 
 	if( in_array($mfn_tmpl_type, array('shop', 'archive-product', 'default')) && (!empty(mfn_opts_get('shop-list-perpage')) || !empty(mfn_opts_get('shop-list-layout')) || !empty($_GET['visual']) || !empty( get_post_meta($shop_archive, 'mfn-shop-list-layout', true) ) || !empty( get_post_meta($shop_archive, 'mfn-shop-list-perpage', true) ) ) ) {
@@ -1657,8 +1668,8 @@ add_filter('woocommerce_catalog_orderby', function ($options) {
       'menu_order' => __( 'Default sorting', 'woocommerce' ),
       'popularity' => __( 'Sort by popularity', 'woocommerce' ),
       'rating' => __( 'Sort by average rating', 'woocommerce' ),
-      'date' => __( 'Sort by newness', 'woocommerce' ),
-      'title' => __( 'Sort by title', 'woocommerce' ),
+      'date' => __( 'Sort by newness', 'betheme' ),
+      'title' => __( 'Sort by title', 'betheme' ),
       'price' => __( 'Sort by price: low to high', 'woocommerce' ),
       'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
       'rand' => __( 'Random', 'woocommerce' ),
@@ -1697,7 +1708,7 @@ function mfn_tell_free_delivery() {
   $free = mfn_opts_get('free-delivery-sum');
   $diff_sum = 0;
   $diff = 0;
-  
+
 
   if($total < $free):
 
@@ -1958,7 +1969,7 @@ function mfn_validate_recaptcha_on_login( $user, $password ) {
 
 
 add_filter( 'woocommerce_product_get_rating_html', function ( $html, $rating, $count ) {
-	
+
 
     if ( $rating <= 0 ) return $html;
 

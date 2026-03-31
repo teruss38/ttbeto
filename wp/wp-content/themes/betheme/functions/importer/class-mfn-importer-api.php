@@ -92,10 +92,7 @@ class Mfn_Importer_API extends Mfn_API {
 			'user-agent' 	=> 'WordPress/'. get_bloginfo( 'version' ) .'; '. network_site_url(),
 			'timeout' 		=> 30,
 		);
-
 		$url = "https://dl.gpltimes.com/file/gpltimes/betheme/demos/{$this->demo}.zip";
-
-
 		$response = wp_remote_get( $url, $args );
 
 		if( is_wp_error( $response ) ){

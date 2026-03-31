@@ -12126,6 +12126,39 @@ if( ! class_exists('Mfn_Builder_Fields') )
    				),
    			),
 
+				// ALIAS: Custom query heading ----------------------------------------------------
+
+   			'heading_title' => array(
+   				'type' => 'heading',
+   				'title' => __('Title', 'mfn-opts'),
+   				'cat' => 'custom_query_loop',
+   			),
+
+   			'heading_price' => array(
+   				'type' => 'heading',
+   				'title' => __('Price', 'mfn-opts'),
+   				'cat' => 'custom_query_loop',
+   			),
+
+   			'image_featured_image' => array(
+   				'type' => 'image',
+   				'title' => __('Featured image', 'mfn-opts'),
+   				'cat' => 'custom_query_loop',
+   			),
+
+   			'button_read_more' => array(
+   				'type' => 'button',
+   				'title' => __('Read more', 'mfn-opts'),
+   				'cat' => 'custom_query_loop',
+   			),
+
+   			'plain_text_excerpt' => array(
+   				'type' => 'plain_text',
+   				'title' => __('Excerpt', 'mfn-opts'),
+   				'cat' => 'custom_query_loop',
+   			),
+
+
    			// ALIAS: Blog Heading ----------------------------------------------------
 
    			'archive_heading' => array(
@@ -18550,7 +18583,7 @@ if( ! class_exists('Mfn_Builder_Fields') )
 
 
 
-				
+
 
    			// Shop Title ----------------------------------------------------
 
@@ -27627,8 +27660,14 @@ if( ! class_exists('Mfn_Builder_Fields') )
 							'class' => 'mfn-toggled',
 		  			),
 
-
-
+						array(
+							'id' => 'css_banner-box_title_text_shadow',
+							'selector' => '.mcb-section .mcb-wrap .mcb-item-mfnuidelement .mfn-banner-box .banner-wrapper .title',
+							'style' => 'text-shadow',
+							'type' => 'text_shadow',
+							'class' => 'mfn-toggled',
+							'title' => __('Text shadow', 'mfn-opts'),
+						),
 
 		  			array(
 							'type' => 'html',
@@ -27698,7 +27737,14 @@ if( ! class_exists('Mfn_Builder_Fields') )
 
 
 
-
+						array(
+							'id' => 'css_banner-box_subtitle_text_shadow',
+							'selector' => '.mcb-section .mcb-wrap .mcb-item-mfnuidelement .mfn-banner-box .banner-wrapper .subtitle',
+							'style' => 'text-shadow',
+							'type' => 'text_shadow',
+							'class' => 'mfn-toggled',
+							'title' => __('Text shadow', 'mfn-opts'),
+						),
 
 
 
@@ -27778,7 +27824,14 @@ if( ! class_exists('Mfn_Builder_Fields') )
 
 
 
-
+						array(
+							'id' => 'css_banner-box_excerpt_text_shadow',
+							'selector' => '.mcb-section .mcb-wrap .mcb-item-mfnuidelement .mfn-banner-box .banner-wrapper .excerpt',
+							'style' => 'text-shadow',
+							'type' => 'text_shadow',
+							'class' => 'mfn-toggled',
+							'title' => __('Text shadow', 'mfn-opts'),
+						),
 
 
 
@@ -27923,7 +27976,14 @@ if( ! class_exists('Mfn_Builder_Fields') )
 
 
 
-
+		  			array(
+							'id' => 'css_banner-box_cta-text_text_shadow',
+							'selector' => '.mcb-section .mcb-wrap .mcb-item-mfnuidelement .mfn-banner-box .banner-wrapper .cta-text',
+							'style' => 'text-shadow',
+							'type' => 'text_shadow',
+							'class' => 'mfn-toggled',
+							'title' => __('Text shadow', 'mfn-opts'),
+						),
 
 
 
@@ -46537,6 +46597,7 @@ if( ! class_exists('Mfn_Builder_Fields') )
 
 						array(
 							'id' => 'css_image_cover_origin',
+              'alias' => 'css_image_cover_origin',
    						'selector' => '.mcb-section .mcb-wrap .mcb-item-mfnuidelement .image_frame.mfn-coverimg .image_wrapper img',
    						'style' => 'object-position',
 							'condition' => array( 'id' => 'image_height', 'opt' => 'is', 'val' => 'custom' ),
@@ -60614,7 +60675,7 @@ if( ! class_exists('Mfn_Builder_Fields') )
 					),
 				),
 
-	
+
 
 
 
@@ -62605,7 +62666,7 @@ if( ! class_exists('Mfn_Builder_Fields') )
 
 
 
-		
+
 
 
 

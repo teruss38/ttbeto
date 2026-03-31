@@ -35,7 +35,7 @@ class Mfn_Builder_Woo_Helper {
 
   	if( !empty($attr['layout_version']) && !empty($attr['layout_new']) && $attr['layout_new'] == 'list' ) $output .= '<div class="mfn-list-layout-desc">';
 
-  	remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10);
+  	// remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10);
   	$output .= '<div class="mfn-li-product-row mfn-li-product-row-title">';
   	ob_start();
   	do_action('woocommerce_before_shop_loop_item_title');
@@ -86,9 +86,13 @@ class Mfn_Builder_Woo_Helper {
   	if( 'plugin' == $shop_images ){
 
 			$output .= '<a href="'. apply_filters( 'the_permalink', get_permalink($product->get_id()) ) .'" class="product-loop-thumb">';
-				remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10);
+
 				ob_start();
+
+				add_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
 				do_action( 'woocommerce_before_shop_loop_item_title' );
+				remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+
 				$output .= ob_get_clean();
 
 			$output .= '</a>';
@@ -124,9 +128,9 @@ class Mfn_Builder_Woo_Helper {
 				$imgs_slider = array();
 
 				$image_wrapper_classes = array('image_wrapper');
-				
+
 				if( 'slider' == $shop_images ) {
-					
+
 					$gallery_ids = $product->get_gallery_image_ids();
 
 					if( !empty($gallery_ids) ){
@@ -136,11 +140,11 @@ class Mfn_Builder_Woo_Helper {
 						if( !empty($product->get_image_id()) ) $imgs_slider[] = wp_get_attachment_url( $product->get_image_id(), 'shop_catalog' );
 
 						foreach ( $gallery_ids as $g=>$image_id ) {
-							$imgs_slider[] = wp_get_attachment_url( $image_id, 'shop_catalog');	
+							$imgs_slider[] = wp_get_attachment_url( $image_id, 'shop_catalog');
 							if( $g == 2 ) break;
 						}
 
-						
+
 						//$slider_data = "data-images='".json_encode($imgs_slider)."'";
 
 					}
@@ -180,7 +184,7 @@ class Mfn_Builder_Woo_Helper {
 							$output .= '<a href="#" class="mfn-product-list-gallery-slider-arrow mfn-plgsn-prev" data-index="0"><i class="icon-left-open-big"></i></a>';
 
 							$output .= '<div href="#" class="mfn-product-list-gallery-slider-pagination">';
-								for ($i=0; $i < count($imgs_slider); $i++) { 
+								for ($i=0; $i < count($imgs_slider); $i++) {
 									$output .= '<a '.( $i == 0 ? 'class="active mfn-plgsnp-dot"' : 'class="mfn-plgsnp-dot"' ).' href="#" data-index="'.$i.'"></a>';
 								}
 							$output .= '</div>';
@@ -270,15 +274,15 @@ class Mfn_Builder_Woo_Helper {
 		return $output;
   }
 
-  public static function get_woo_product_description($product, $attr = false){
+  public static function get_woo_product_description($product, $attr = false) {
 
 		$output = '';
 
 		if( $attr && !empty($attr['description']) && $attr['description'] == 'list' && $attr['tmp_layout'] != 'list' ) return $output;
 
-  	if( get_the_excerpt($product->get_id()) && !empty($attr['description']) ){
+  	if( get_the_excerpt($product->get_id()) && !empty($attr['description']) ) {
 			$output .= '<div class="mfn-li-product-row mfn-li-product-row-description excerpt-'. ( !empty($attr['description']) ? $attr['description'] : 'unset') .'">';
-				$output .= '<p class="excerpt">'. do_shortcode( get_the_excerpt($product->get_id()) ) .'</p>';
+				$output .= '<div class="excerpt">'. do_shortcode( get_the_excerpt($product->get_id()) ) .'</div>';
 			$output .= '</div>';
 		}
 
@@ -441,7 +445,7 @@ class Mfn_Builder_Woo_Helper {
   	$output .= self::get_woo_product_image($product, $attr);
 
   	$output .= '<div class="mfn-list-layout-desc">';
-  		
+
   		$output .= self::get_woo_product_title($product, $attr);
   		$output .= self::get_woo_product_brand($product, $attr);
 
@@ -496,12 +500,12 @@ class Mfn_Builder_Woo_Helper {
 									$output .= wp_get_attachment_image( get_term_meta( $term->term_id, 'thumbnail_id', true ), 'full' );
 								}else{
 									$output .= __( $term->name );
-								}						
+								}
 
 								$output .= '</a>';
 						}
 					}
-				
+
 			$output .= '</div>';
 		}
 
@@ -679,7 +683,7 @@ class Mfn_Builder_Woo_Helper {
 		    $q = self::mfn_build_product_query( $args, $attr );
 
 		    return [ 'type' => 'custom', 'query' => $q ];
-		    
+
 			}
 
 

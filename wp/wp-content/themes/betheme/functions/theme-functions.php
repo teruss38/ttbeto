@@ -585,14 +585,15 @@ add_action('admin_menu', 'mfn_hide_custom_fields');
 
 if (! function_exists('remove_standard_woo_actions_archive')) {
 	function remove_standard_woo_actions_archive(){
-		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
-		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
-		remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
 
-		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
+    remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+
+    remove_action( 'woocommerce_after_shop_loop_item_title', 'mfn_append_excerpt_loop', 5 );
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+    remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10 );
 
 		remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
-		remove_action( 'woocommerce_after_shop_loop_item_title', 'mfn_append_excerpt_loop', 5 );
 	}
 }
 
@@ -793,7 +794,7 @@ if (! function_exists('mfn_template_part_ID')) {
 				if( !empty($tmpl_d_part) && get_post_type($tmpl_d_part) == 'template' && get_post_status($tmpl_d_part) == 'publish' ) return $tmpl_d_part;
 			}
 		}
-		
+
 
 		// set in single product || shop arhive template
 		if( function_exists('is_woocommerce') && is_woocommerce() ) {
@@ -3934,7 +3935,6 @@ add_filter( 'rank_math/researches/toc_plugins', function( $toc_plugins ) {
  function mfn_is_registered()
  {
  	return 36;
-
  	if ( mfn_get_purchase_code() ) {
  		return strlen( mfn_get_purchase_code() );
  	}

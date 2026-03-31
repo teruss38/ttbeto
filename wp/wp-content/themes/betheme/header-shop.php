@@ -196,6 +196,10 @@ if( !empty( get_post_meta(get_the_ID(), 'mfn-post-js', true) ) ) echo get_post_m
 
 											$title_tag = mfn_opts_get('subheader-title-tag', 'h1');
 
+											if( is_product() ){
+												$title_tag = mfn_opts_get('shop-product-tag', $title_tag);
+											}
+
 											echo '<'. mfn_allowed_title_tag($title_tag) .' class="title">';
 												if (function_exists('is_product') && is_product() && mfn_opts_get('shop-product-title')) {
 													the_title();

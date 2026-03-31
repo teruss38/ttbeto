@@ -183,6 +183,14 @@ if (! function_exists('mfn_seo')) {
 			echo mfn_opts_get('google-gtag-js');
 		}
 
+		// Performance | Preload
+
+		if ( ! empty( mfn_opts_get('performance-preload') ) ) {
+			echo "\n";
+			echo mfn_opts_get('performance-preload');
+			echo "\n";
+		}
+
 	}
 }
 add_action('wp_head', 'mfn_seo', 1);
@@ -2609,7 +2617,7 @@ if (! function_exists('mfn_body_classes')) {
 
 			$checkout_id = wc_get_page_id('checkout');
 			$checkout_content = !empty($checkout_id) ? (string) get_post_field( 'post_content', $checkout_id ) : '';
-	    
+
 	    if ( $checkout_id && function_exists( 'has_block' ) && has_block( 'woocommerce/checkout', $checkout_content ) && !empty(mfn_opts_get('gutenberg-checkout')) ) {
 	        $classes[] = 'mfn-blocks-checkout-summary-bg'; // checkout based on legacy shortcode
 	    }
@@ -2625,7 +2633,7 @@ if (! function_exists('mfn_body_classes')) {
 		}
 
 		return $classes;
-		
+
 	}
 }
 add_filter('body_class', 'mfn_body_classes');

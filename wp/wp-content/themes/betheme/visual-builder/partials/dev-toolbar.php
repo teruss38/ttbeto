@@ -29,7 +29,7 @@ if( wp_get_referer() && strpos( wp_get_referer(), 'login' ) === false && strpos(
 <div class="mfn-topbar">
 
     <div class="topbar-nav">
-        <?php if( ! WHITE_LABEL ){ ?>
+        <?php if( ! WHITE_LABEL ) { ?>
             <a href="<?php echo admin_url('admin.php?page='.apply_filters('betheme_slug', 'betheme')); ?>" class="mfnb-logo" <?php echo $custom_replaced_logo; ?>>Be Builder - Powered by Muffin Group</a>
         <?php }else{ ?>
             <a href="<?php echo admin_url('admin.php?page='.apply_filters('betheme_slug', 'betheme')); ?>" class="mfnb-logo" style="background-image:unset"></a>
@@ -40,7 +40,7 @@ if( wp_get_referer() && strpos( wp_get_referer(), 'login' ) === false && strpos(
                 <li class="menu-sections"><a data-tooltip="<?php esc_html_e('Pre-built sections', 'mfn-opts'); ?>" data-position="bottom" href="#"><?php esc_html_e('Pre-built sections', 'mfn-opts'); ?></a></li>
                 <li class="menu-export"><a class="mfn-export-get" data-tooltip="<?php esc_html_e('Export / Import', 'mfn-opts'); ?> <?php echo ($this->view == 'demo' ? '(Unavailable in Demo)' : ''); ?>" data-position="bottom" href="#"><?php esc_html_e('Export / Import', 'mfn-opts'); ?></a></li>
                 <?php if ( defined( 'WPSEO_FILE' ) && $this->post_type !== 'template' ) { ?>
-                	<li class="menu-yoast"><a data-tooltip="<?php esc_html_e('Yoast SEO', 'mfn-opts'); ?>" class="mfn-option-btn btn-large mfn-option-blank mfn-yoast-tab" title="Yoast SEO" href="#" data-position="bottom"><?php esc_html_e('Yoast SEO', 'mfn-opts'); ?></a></li>
+                	<li class="menu-yoast"><a data-tooltip="<?php esc_html_e('Yoast SEO', 'mfn-opts'); ?>" class="mfn-yoast-tab" title="Yoast SEO" href="#" data-position="bottom"><?php esc_html_e('Yoast SEO', 'mfn-opts'); ?></a></li>
                 <?php }elseif( ! apply_filters('betheme_disable_single', false) ){ ?>
                 	<li class="menu-page"><a data-tooltip="<?php esc_html_e('Single page import', 'mfn-opts'); ?> <?php echo ($this->view == 'demo' ? '(Unavailable in Demo)' : ''); ?>" data-position="bottom" href="#"><?php esc_html_e('Single page import', 'mfn-opts'); ?></a></li>
                 <?php } ?>

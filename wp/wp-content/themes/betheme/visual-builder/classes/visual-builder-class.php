@@ -255,7 +255,7 @@ class MfnVisualBuilder {
 
 		wp_enqueue_script('mfn-vbcolorpickerjs', get_theme_file_uri('/visual-builder/assets/js/pickr.min.js'), false, time(), true);
 		wp_enqueue_script('mfn-inline-editor-js', get_theme_file_uri('/visual-builder/assets/js/medium-editor.min.js'), false, time(), true);
-		wp_enqueue_script('mfn-vblistjs', get_theme_file_uri('/visual-builder/assets/js/list.min.js'), false, time(), true);
+		// wp_enqueue_script('mfn-vblistjs', get_theme_file_uri('/visual-builder/assets/js/list.min.js'), false, time(), true);
 
 
 		wp_enqueue_script('mfn-vbace', 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.31.2/ace.js', false, time(), true);

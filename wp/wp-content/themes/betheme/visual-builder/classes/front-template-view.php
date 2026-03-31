@@ -94,9 +94,29 @@ class Mfn_Template_View
 				unset( $return['exclude'] );
 			}
 
-			if( !empty($return) && is_array($return) ){
-				return $return[array_key_last($return)];
+			if (!empty($return) && is_array($return)) {
+
+				  // Flatten (any nesting) -> array of ints
+				  $flat = [];
+				  $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($return));
+				  foreach ($it as $v) {
+				    $id = (int) $v;
+				    if ($id > 0) $flat[] = $id;
+				  }
+
+				  // Optional: remove duplicates + reindex
+				  $flat = array_values(array_unique($flat));
+
+				  // Your original logic: iterate from the end
+				  for ($i = count($flat) - 1; $i >= 0; $i--) {
+				    $id = $flat[$i];
+				    if ($id && get_post_status($id) === 'publish') {
+				      return $id; // return published post ID
+				    }
+				  }
 			}
+			
+			return false;
 
 		}else{
 
@@ -189,10 +209,30 @@ class Mfn_Template_View
 					return false;
 				}
 			}
-			
-			if( !empty($return) && is_array($return) ){
-				return $return[array_key_last($return)];
+
+			if (!empty($return) && is_array($return)) {
+
+				  // Flatten (any nesting) -> array of ints
+				  $flat = [];
+				  $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($return));
+				  foreach ($it as $v) {
+				    $id = (int) $v;
+				    if ($id > 0) $flat[] = $id;
+				  }
+
+				  // Optional: remove duplicates + reindex
+				  $flat = array_values(array_unique($flat));
+
+				  // Your original logic: iterate from the end
+				  for ($i = count($flat) - 1; $i >= 0; $i--) {
+				    $id = $flat[$i];
+				    if ($id && get_post_status($id) === 'publish') {
+				      return $id; // return published post ID
+				    }
+				  }
 			}
+
+			return false;
 
 		}else{
 

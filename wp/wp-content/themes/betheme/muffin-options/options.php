@@ -531,6 +531,19 @@ if ( ! class_exists( 'MFN_Options' ) ) {
 				$this->options['font-lead'] = $this->options['font-content'] ?? '';
 			}
 
+			// Header Search Form @since 28.3.1
+
+			if( ! isset( $this->options['header-search-form'] ) ) {
+				if( isset( $this->options['header-search'] ) ){
+					if( 'shop' != $this->options['header-search'] ){
+						$this->options['header-search'] = '';
+					}
+				} else {
+					$this->options['header-search'] = '';
+					$this->options['header-search-form'] = '0';
+				}
+			}
+
 			// Remove unwanted SEO tags @since 28.1.9
 
 			$domain_to_check = 'muffingroup.com';

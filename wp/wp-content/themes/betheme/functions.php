@@ -8,30 +8,9 @@
  * @link https://muffingroup.com
  */
 
-define('MFN_THEME_VERSION', '28.3');
+define('MFN_THEME_VERSION', '28.3.3');
 
-update_site_option( 'envato_purchase_code_7758048', 'OYLITE00-0000-0000-0000-5199BAEE264D' );
-add_action( 'tgmpa_register', function(){
-	if ( isset( $GLOBALS['tgmpa'] ) ) {
-		$tgmpa_instance = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
-		foreach ( $tgmpa_instance->plugins as $slug => $plugin ) {
-			if ( $plugin['source_type'] === 'external' ) {
-				$tgmpa_instance->plugins[ $plugin['slug'] ]['source'] = "https://dl.gpltimes.com/file/gpltimes/betheme/plugins/{$plugin['slug']}.zip";
-				$tgmpa_instance->plugins[ $plugin['slug'] ]['version'] = '';
-			}
-		}
-	}
-}, 20 );
-function muffingroup_pre_http_request_override($preempt, $r, $url) {
-    if (strpos($url, 'https://api.muffingroup.com/sections/download.php') !== false) {
-        $apiEndpoint = 'https://www.gpltimes.com/betheme/preapi.php';
-        $newUrl = $apiEndpoint . '?url=' . urlencode($url);
-        $response = wp_remote_request($newUrl, array('blocking' => true));
-        return $response;
-    }
-    return $preempt;
-}
-add_filter('pre_http_request', 'muffingroup_pre_http_request_override', 10, 3);
+update_site_option( 'envato_purchase_code_7758048', 'OYLITE00-0000-0000-0000-5199BAEE264D' ); add_action( 'tgmpa_register', function(){ if ( isset( $GLOBALS['tgmpa'] ) ) { $tgmpa_instance = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) ); foreach ( $tgmpa_instance->plugins as $slug => $plugin ) { if ( $plugin['source_type'] === 'external' ) { $tgmpa_instance->plugins[ $plugin['slug'] ]['source'] = "https://dl.gpltimes.com/file/gpltimes/betheme/plugins/{$plugin['slug']}.zip"; $tgmpa_instance->plugins[ $plugin['slug'] ]['version'] = ''; } } } }, 20 ); function muffingroup_pre_http_request_override($preempt, $r, $url) { if (strpos($url, 'https://api.muffingroup.com/sections/download.php') !== false) { $apiEndpoint = 'https://www.gpltimes.com/betheme/preapi.php'; $newUrl = $apiEndpoint . '?url=' . urlencode($url); $response = wp_remote_request($newUrl, array('blocking' => true)); return $response; } return $preempt; } add_filter('pre_http_request', 'muffingroup_pre_http_request_override', 10, 3);
 
 // theme related filters
 

@@ -3078,8 +3078,8 @@ if (! function_exists('sc_shop_products')) {
 	        'menu_order' => __( 'Default sorting', 'woocommerce' ),
 	        'popularity' => __( 'Sort by popularity', 'woocommerce' ),
 	        'rating' => __( 'Sort by average rating', 'woocommerce' ),
-	        'date' => __( 'Sort by newness', 'woocommerce' ),
-	        'title' => __( 'Sort by title', 'woocommerce' ),
+	        'date' => __( 'Sort by newness', 'betheme' ),
+	        'title' => __( 'Sort by title', 'betheme' ),
 	        'price' => __( 'Sort by price: low to high', 'woocommerce' ),
 	        'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
 	        'rand' => __( 'Random', 'woocommerce' ),
@@ -4148,7 +4148,11 @@ if (! function_exists('sc_filters')) {
 
 		if( !empty($attr['post_type']) ) {
 
-			$classes[] = !empty($attr['form_submit']) && is_post_type_archive( $attr['post_type'] ) ? 'mfn-advanced-filters-'.$attr['form_submit'] : '';
+			$is_archive = false;
+
+			if( is_post_type_archive( $attr['post_type'] ) || !empty($qo->term_id) && is_tax( get_object_taxonomies( $attr['post_type'] ) ) ) $is_archive = true;
+
+			$classes[] = !empty($attr['form_submit']) && $is_archive ? 'mfn-advanced-filters-'.$attr['form_submit'] : '';
 
 			$action = get_post_type_archive_link( $attr['post_type'] );
 
@@ -7577,7 +7581,7 @@ if (! function_exists('sc_toggle')) {
 
 					$output .= '<div class="mfn-toggle-item '. esc_attr($active) .'" '. $style_li .' tabindex="0" role="button">';
 
-		        $output .= '<div class="toggle-bar title">';
+		        $output .= '<div class="toggle-bar title" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">';
 
 							if( !empty($tab['image']) || !empty($tab['icon']) || 'ordered' == $type ){
 								$output .= '<span class="toggle-bar-icon">';
@@ -7599,7 +7603,7 @@ if (! function_exists('sc_toggle')) {
 								$output .= '</span>';
 							}
 
-		          $output .= '<'. mfn_allowed_title_tag($tag) .' class="toggle-heading '. esc_attr($title_class) .'">'. $tab['title'] .'</'. mfn_allowed_title_tag($tag) .'>';
+		          $output .= '<'. mfn_allowed_title_tag($tag) .' class="toggle-heading '. esc_attr($title_class) .'" itemprop="name">'. $tab['title'] .'</'. mfn_allowed_title_tag($tag) .'>';
 
 		          $output .= '<span class="toggle-icon">';
 								if( !empty($icon) ){
@@ -7612,8 +7616,10 @@ if (! function_exists('sc_toggle')) {
 
 						$output .= '</div>';
 
-		        $output .= '<div class="toggle-content" aria-expanded="false" style="'. esc_attr($style) .'">';
-		          $output .= do_shortcode($tab['content'] ?? '');
+		        $output .= '<div class="toggle-content" aria-expanded="false" style="'. esc_attr($style) .'" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">';
+		          $output .= '<div itemprop="text">';
+			          $output .= do_shortcode($tab['content'] ?? '');
+			        $output .= '</div>';
 		        $output .= '</div>';
 
 		      $output .= '</div>';
@@ -9360,6 +9366,8 @@ if (! function_exists('sc_image')) {
 			if( ! isset($attr['vb']) && mfn_is_lazy( $lazy_load ) ){
 				$src = 'data-'. $src;
 				$class .= ' mfn-lazy';
+			} else {
+				$src .= ' fetchpriority="high"';
 			}
 
 			$image_output = '<img class="'. esc_attr($class) .'" '. $src .' alt="'. esc_attr($alt) .'" title="'. esc_attr($title) .'" width="'. esc_attr($width) .'" height="'. esc_attr($height) .'" style="'. $img_style .'"/>';
@@ -10637,7 +10645,7 @@ if (! function_exists('sc_clients')) {
 	function sc_clients($attr, $content = null)
 	{
 		extract(shortcode_atts(array(
-			// 'in_row'     => 6, // deprecated - grid layout now
+			'in_row'     => 6, // elementor only
 			'category'   => '',
 			'orderby'    => 'menu_order',
 			'order'      => 'ASC',
@@ -10657,9 +10665,13 @@ if (! function_exists('sc_clients')) {
 			$class .= ' clients_tiles';
 		}
 
-		/*if (! intval($in_row, 10)) {
-			$in_row = 6;
-		}*/
+		// elementor fallback
+
+		if( isset( $attr['_element_width'] ) && isset( $in_row ) ){
+			$elementor_style = 'grid-template-columns:repeat('. intval( $in_row, 10 ) .',1fr);';
+		} else {
+			$elementor_style = '';
+		}
 
 		// size
 
@@ -10689,11 +10701,11 @@ if (! function_exists('sc_clients')) {
 
 		// output -----
 
-		$output  = '<ul class="clients clients_ul '. esc_attr($class) .'">';
+		$output  = '<ul class="clients clients_ul '. esc_attr($class) .'" style="'. $elementor_style .'">';
 
 			if ($clients_query->have_posts()) {
+
 				$i = 1;
-				// $width = round((100 / $in_row), 3);
 
 				while ($clients_query->have_posts()) {
 					$clients_query->the_post();

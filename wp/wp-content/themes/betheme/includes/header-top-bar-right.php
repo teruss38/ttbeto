@@ -49,7 +49,7 @@ $cart_icon = trim( mfn_opts_get('shop-cart') ?? '' );
 
 // search
 
-$header_search = mfn_opts_get('header-search');
+$header_search = mfn_opts_get('header-search-form');
 
 // action button
 
@@ -101,6 +101,10 @@ if ( $has_user || $has_wishlist || $has_cart || $header_search || $action_link |
 
 				echo '<div class="top-bar-right-input has-input">';
 					echo '<form method="get" class="form-searchform" id="searchform" action="'. esc_url(home_url('/')) .'" role="search" aria-label="'. __('header search form', 'betheme') .'">';
+
+						if ( mfn_opts_get('header-search') == 'shop' ) {
+							echo '<input type="hidden" name="post_type" value="product" />';
+						}
 
 						echo $search_icon;
 						echo '<input type="text" class="field" name="s" autocomplete="off" placeholder="'. esc_html($translate['search-placeholder']) .'" aria-label="'. esc_html($translate['search-placeholder']) .'" />';
@@ -186,6 +190,10 @@ if ( $has_user || $has_wishlist || $has_cart || $header_search || $action_link |
 
 					echo '<div class="top-bar-right-input has-input">';
 						echo '<form method="get" class="top-bar-search-form form-searchform" id="searchform" action="'. esc_url(home_url('/')) .'" role="search" aria-label="'. __('header search form', 'betheme') .'">';
+
+							if ( mfn_opts_get('header-search') == 'shop' ) {
+								echo '<input type="hidden" name="post_type" value="product" />';
+							}
 
 							echo $search_icon;
 							echo '<input type="text" class="field" name="s" autocomplete="off" placeholder="'. esc_html($translate['search-placeholder']) .'" aria-label="'. esc_html($translate['search-placeholder']) .'"/>';

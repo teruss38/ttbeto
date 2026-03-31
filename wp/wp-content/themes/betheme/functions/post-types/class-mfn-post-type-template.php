@@ -1571,7 +1571,7 @@ if (! class_exists('Mfn_Post_Type_Template')) {
 	  					'condition' => array( 'id' => 'mfn_sidemenu_visibility', 'opt' => 'is', 'val' => 'always-visible' ),
 	  					'type' => 'switch',
 	  					'title' => __('Header visibility', 'mfn-opts'),
-	  					'desc' => __('Optionally, hide the header when sidebar is visible', 'mfn-opts'),
+	  					'desc' => __('Optionally, hide the header template (above 1240px width) when sidebar is visible', 'mfn-opts'),
 	  					'options' => array(
 	  						'' => __('Visible', 'mfn-opts'),
 	  						'1' => __('Hidden', 'mfn-opts'),

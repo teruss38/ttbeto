@@ -2647,7 +2647,7 @@ if( ! function_exists( 'mfn_opts_setup' ) )
 
 				array(
 					'id' => 'subheader-title-tag',
-					'type' => 'select',
+					'type' => 'switch',
 					'title' => __('Title tag', 'mfn-opts'),
 					'options' => array(
 						'h1'	=> 'H1',
@@ -2658,6 +2658,7 @@ if( ! function_exists( 'mfn_opts_setup' ) )
 						'h6'	=> 'H6',
 						'span'	=> 'span',
 					),
+					'std' => 'h1',
 				),
 
 				// background
@@ -5208,6 +5209,22 @@ if( ! function_exists( 'mfn_opts_setup' ) )
 				),
 
 				array(
+					'id' => 'shop-product-tag',
+					'type' => 'switch',
+					'title' => __('Subheader title tag', 'mfn-opts'),
+					'options' => array(
+						'h1'	=> 'H1',
+						'h2'	=> 'H2',
+						'h3'	=> 'H3',
+						'h4'	=> 'H4',
+						'h5'	=> 'H5',
+						'h6'	=> 'H6',
+						'span'	=> 'span',
+					),
+					'std' => 'h1',
+				),
+
+				array(
 					'id' => 'shop-hide-content',
 					'type' => 'switch',
 					'title' => __('The content', 'mfn-opts'),
@@ -6241,35 +6258,65 @@ if( ! function_exists( 'mfn_opts_setup' ) )
 				// general
 
 				array(
-					'title' => __('Icon', 'mfn-opts'),
+					'title' => __('General', 'mfn-opts'),
 					'class' => 'mhb-opt',
 					'type' => 'header',
 				),
 
+				// array(
+				// 	'id' => 'header-search',
+				// 	'attr_id' => 'header-search',
+				// 	'type' => 'select',
+				// 	'title' => __('Search', 'mfn-opts'),
+				// 	'options' => array(
+				// 		'1' => __('Icon | Default', 'mfn-opts'),
+				// 		'shop' => __('Icon | Search Shop Products only', 'mfn-opts'),
+				// 		'input' => __('Search Field', 'mfn-opts'),
+				// 		'0' => __('Hide', 'mfn-opts'),
+				// 	),
+				// 	'std' => '0',
+				// 	'class' => 're_render_to',
+				// 	're_render_if' => 'div|#Header',
+				// ),
+
 				array(
 					'id' => 'header-search',
 					'attr_id' => 'header-search',
-					'type' => 'select',
-					'title' => __('Search', 'mfn-opts'),
+					'type' => 'switch',
+					'title' => __('Search type', 'mfn-opts'),
 					'options' => array(
-						'1' => __('Icon | Default', 'mfn-opts'),
-						'shop' => __('Icon | Search Shop Products only', 'mfn-opts'),
-						'input' => __('Search Field', 'mfn-opts'),
+						'' => __('Default (All content)', 'mfn-opts'),
+						'shop' => __('Shop Products only', 'mfn-opts'),
+					),
+					'std' => '',
+					'class' => 're_render_to',
+					're_render_if' => 'div|#Header',
+				),
+
+				array(
+					'id' => 'header-search-form',
+					'attr_id' => 'header-search-form',
+					'type' => 'switch',
+					'title' => __('Search form', 'mfn-opts'),
+
+					'options' => array(
 						'0' => __('Hide', 'mfn-opts'),
+						'1' => __('Icon', 'mfn-opts'),
+						'input' => __('Search Field', 'mfn-opts'),
 					),
 					'std' => '0',
-					'class' => 're_render_to',
+					'class' => 'hide-if-tpl-header re_render_to',
 					're_render_if' => 'div|#Header',
 				),
 
 				array(
 					'id' => 'header-search-input-width',
 					'type' => 'text',
-					'condition' => array( 'id' => 'header-search', 'opt' => 'is', 'val' => 'input' ), // is or isnt and value
+					'condition' => array( 'id' => 'header-search-form', 'opt' => 'is', 'val' => 'input' ), // is or isnt and value
 					'title' => __('Input field width', 'mfn-opts'),
 					'std' => '200',
 					'param' => 'number',
-					'class' => 'narrow',
+					'class' => 'hide-if-tpl-header narrow',
 					'after' => __('px', 'mfn-opts'),
 				),
 
@@ -11601,7 +11648,7 @@ if( ! function_exists( 'mfn_opts_setup' ) )
 				array(
 					'id' => 'images-optimization-remove',
 					'type' => 'switch',
-					'title' => __('Images optimization - Oryginal image', 'mfn-opts'),
+					'title' => __('Images optimization - Original image', 'mfn-opts'),
 					'desc' => __('If this option is set to remove, after converting the image to WebP, the original uploaded file (.jpeg, .png) is removed from the server.', 'mfn-opts'),
 					'condition' => array( 'id' => 'images-optimization', 'opt' => 'isnt', 'val' => '' ),
 					'options' => array(
@@ -11609,6 +11656,14 @@ if( ! function_exists( 'mfn_opts_setup' ) )
 						'1' => __('Remove', 'mfn-opts'),
 					),
 					'std' => '',
+				),
+
+				array(
+					'id' => 'performance-preload',
+					'type' => 'textarea',
+					'title' => __('Preload images', 'mfn-opts'),
+					'desc' => __('Code will be included inside <b>&#x3C;head&#x3E;</b> tag<br /><b>Example:</b> &#x3C;link rel=&#x22;preload&#x22; as=&#x22;image&#x22; href=&#x22;IMAGE_URL&#x22; fetchpriority=&#x22;high&#x22;&#x3E;', 'mfn-opts'),
+					'class' => 'form-content-full-width',
 				),
 
 				// assets

@@ -139,7 +139,7 @@ var elements = {
         
         if(_.has(new_item, 'script')) delete new_item.script;
 
-        if( name != alias && typeof aliases[alias] !== 'undefined' ){
+        if( name != alias && typeof aliases[alias] !== 'undefined' ) {
             aliases[alias].map(function(el) {
                 html = html.replace(new_item['attr'][el.key], el.val); // update html
                 new_item['attr'][el.key] = el.val; // update object
@@ -276,6 +276,7 @@ function showYoast() {
 
     if( ui_mode == 'dev' ){
         $('.mfn-visualbuilder .mfn-topbar .topbar-nav nav ul li').removeClass('active');
+        $('.mfn-visualbuilder .mfn-topbar .topbar-nav nav ul li.menu-yoast').addClass('active');
     }
 }
 
@@ -546,13 +547,14 @@ function hideLeftItemsContext(e) {
     $content.find('body').unbind('click', hideLeftItemsContext);
 }
 
-$('.mfn-fav-items-wrapper h5').on('click', function(e) {
+$('.mfn-widgets-group h5.mfn-widgets-group-title').on('click', function(e) {
     e.preventDefault();
-    $('.mfn-fav-items-wrapper').toggleClass('mfn-favs-closed');
-    if( $('.mfn-fav-items-wrapper').hasClass('mfn-favs-closed') ){
-        $('.mfn-fav-items-content').slideUp(300);
+    let wrapper = $(this).closest('.mfn-widgets-group');
+    wrapper.toggleClass('mfn-widgets-group-closed');
+    if( wrapper.hasClass('mfn-widgets-group-closed') ){
+        wrapper.find('.mfn-widgets-group-content').slideUp(300);
     }else{
-        $('.mfn-fav-items-content').slideDown(300);
+        wrapper.find('.mfn-widgets-group-content').slideDown(300);
     }
 });
 
@@ -579,15 +581,15 @@ $('.mfn-items-list-contextmenu ul li a').on('click', function(e) {
 
         }).done(function(response){
             if( response == 'set'){
-                $('.mfn-fav-items-wrapper ul.fav-items-list').append( $('.mfn-visualbuilder .sidebar-panel-content ul.items-list li[data-type="'+item_name+'"]').clone(true) );
+                $('.mfn-widgets-group ul.fav-items-list').append( $('.mfn-visualbuilder .sidebar-panel-content ul.items-list:not(.fav-items-list) li[data-type="'+item_name+'"]').clone(true) );
             }else{
-                $('.mfn-fav-items-wrapper ul.fav-items-list li[data-type="'+item_name+'"]').remove();
+                $('.mfn-widgets-group ul.fav-items-list li[data-type="'+item_name+'"]').remove();
             }
 
-            if( !$('.mfn-fav-items-wrapper ul.fav-items-list li').length ){
-                $('.mfn-fav-items-wrapper').removeClass('isset-favs').addClass('empty-favs');
+            if( !$('.mfn-widgets-group ul.fav-items-list li').length ){
+                $('.mfn-widgets-group').removeClass('mfn-not-empty-widgets-group').addClass('mfn-empty-widgets-group');
             }else{
-                $('.mfn-fav-items-wrapper').addClass('isset-favs').removeClass('empty-favs');
+                $('.mfn-widgets-group').addClass('mfn-not-empty-widgets-group').removeClass('mfn-empty-widgets-group');
             }
         });
     }
@@ -2713,9 +2715,7 @@ var be_layout = {
                 blink();
             }
 
-            $('#mfn-widgets-list .panel-search .mfn-search').val('');
-
-            userList.search();
+            $('#mfn-widgets-list .panel-search .mfn-search').val('').trigger('change');
 
             inlineEditor();
             be_layout.emptys.wraps();
@@ -5377,6 +5377,7 @@ $('.mfn-modal.modal-select-icon .mfn-items-list li a').on('click', function(e) {
         $('.sidebar-panel-content .mfn-form-row .browse-icon.current-icon-editing').removeClass('empty current-icon-editing');
         $('.mfn-modal').removeClass('show');
     }
+
 });
 
 // delete icon
@@ -15341,23 +15342,27 @@ $('.mfn-revisions-opt').on('click', function(e) {
 
 
 $('.sidebar-panel #mfn-widgets-list .mfn-search').on('focus', function() {
-    $('.mfn-visualbuilder .sidebar-panel-content ul.items-list li').show();
+    //$('.mfn-visualbuilder .sidebar-panel-content ul.items-list li').show();
     $('.mfn-filter-items').removeClass('active');
     $('.mfn-filter-items[data-filter="all"]').addClass('active');
     $('.filter-items-current').text($('.mfn-filter-items[data-filter="all"]').text());
 });
 
-var options = {
-  valueNames: [ 'title' ]
-};
+$('.sidebar-panel #mfn-widgets-list .mfn-search').on('keyup change', function() {
+    let val = $(this).val();
 
-var userList = new List('mfn-widgets-list', options);
+    if( val.length ){
+        $('.mfn-visualbuilder .sidebar-panel .sidebar-panel-content .panel .mfn-widgets-group').hide();
+        $('.mfn-visualbuilder .sidebar-panel .sidebar-panel-content .panel ul li').hide();
+        if($('.mfn-visualbuilder .sidebar-panel .sidebar-panel-content .panel ul li[data-title*="'+val+'"]').closest('.mfn-widgets-group').length) $('.mfn-visualbuilder .sidebar-panel .sidebar-panel-content .panel ul li[data-title*="'+val+'"]').closest('.mfn-widgets-group').show();
+        $('.mfn-visualbuilder .sidebar-panel .sidebar-panel-content .panel ul li[data-title*="'+val+'"]').show();
+    }else{
+        $('.mfn-visualbuilder .sidebar-panel .sidebar-panel-content .panel .mfn-widgets-group').show();
+        $('.mfn-visualbuilder .sidebar-panel .sidebar-panel-content .panel ul li').show();
+    }
 
-var optionsicons = {
-  valueNames: [ 'titleicon' ]
-};
+});
 
-var iconsList = new List('modal-select-icon', optionsicons);
 
 // filter items
 
@@ -15366,10 +15371,9 @@ $('.mfn-filter-items').on('click', function(e) {
     $('.mfn-filter-items').removeClass('active');
     $(this).addClass('active');
     $('.filter-items-current').text($(this).text());
-    let filtr = $(this).data('filter');
+    let filtr = $(this).attr('data-filter');
 
-    $('.sidebar-panel #mfn-widgets-list .mfn-search').val('');
-    userList.search();
+    $('.sidebar-panel #mfn-widgets-list .mfn-search').val('').trigger('change');
 
     if(filtr == 'all'){
         $('.mfn-visualbuilder .sidebar-panel-content ul.items-list li').show();
@@ -15412,6 +15416,23 @@ $('.mfn-ui .modal-select-icon .modalbox-search .mfn-form-select').on('change', f
     $('.mfn-ui .modal-select-icon .modalbox-content ul.mfn-items-list li').hide();
     $('.mfn-ui .modal-select-icon .modalbox-content ul.mfn-items-list li.'+choosed).show();
 });
+
+
+$(document).on('keyup', '.modal-select-icon .mfn-search', function() {
+    let val = $(this).val().toLowerCase();
+
+    if( !val.length ) {
+        $('.modal-select-icon .mfn-items-list li').removeAttr('style');
+        return;
+    }
+
+    $('.modal-select-icon .mfn-items-list li').hide();
+    $('.modal-select-icon .mfn-items-list li[data-rel*="'+val+'"]').show();
+
+});
+
+
+
 
 // show prebuilts
 
